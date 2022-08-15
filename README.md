@@ -16,3 +16,17 @@
 - 컨벤션 통일
 
 ### 변수 var, 상수 const
+- 변수에서 shortVariable 기억! => 스택 {} 안 스코프를 가진다.
+- 여러 개를 선언하고 다른 타입을 할당할 수 있음.
+- 다른 언어들과 마찬가지로 const 는 선언과 동시에 초기화 필요, 재할당 X
+
+### 제어문
+
+#### 1. if
+- if, if else, if else if 가능. 중괄호 위치 지정, 생략 불가능
+
+#### 2. switch
+- switch 뒤 Expression 생략 가능
+- case 뒤 Expression 사용 가능
+- 자동 break가 있기 때문에 fallthrough 존재
+- type 분기 -> 값이 하닌 변수 Type으로 분기 가능
