@@ -16,6 +16,7 @@ func main() {
 	for i <= 100 {
 		sum2 += i
 		i++
+		////후치연산 반환값 x
 	}
 
 	fmt.Println("ex2 : ", sum2)
@@ -28,6 +29,13 @@ func main() {
 		}
 		sum3 += i
 		i++
+
 	}
 	fmt.Println("ex3 : ", sum3)
+
+	//ex 4
+	for i, j := 0, 0; i <= 10; i, j = i+1, j+10 {
+		fmt.Println("ex 4 : ", i, j)
+	}
+
 }

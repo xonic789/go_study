@@ -17,4 +17,5 @@ func main() {
 	default:
 		fmt.Println("i -> ", i, " 기본 값")
 	}
+
 }
