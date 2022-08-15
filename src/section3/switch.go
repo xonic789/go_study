@@ -31,4 +31,23 @@ func main() {
 	default:
 		fmt.Println("not match")
 	}
+
+	//
+	switch c := "go"; c + "lang" {
+	case "golang":
+		fmt.Println("Golang")
+	case "java":
+		fmt.Println("Java")
+	default:
+		fmt.Println("not match")
+	}
+
+	switch i, j := 20, 30; {
+	case i < j:
+		fmt.Println("i는 j보다 작다")
+	case i == j:
+		fmt.Println("i와 j는 같다")
+	case i > j:
+		fmt.Println("i는 j보다 크다")
+	}
 }
