@@ -49,6 +49,29 @@
 - Go의 지향점은 하나의 모듈은 응집도가 높고 결합도가 낮은, 즉 우리가 지향점으로 삼고 있는 소프트웨어 아키텍쳐와 비슷하다고 할 수 있다.
 - 하나의 package 는 하나의 기능을 표출할 수 있어야함.
 - 작은 패키지를 결합해서 프로그램을 작성 할 것을 권고하고 있다.
-
-### 네이밍 규칙
+**네이밍 규칙**
 - 대문자 public, 소문자 private 접근 제어를 가짐
+- 별칭(alias) 패키지 사용 가능.  
+**초기화 메서드**
+- `func init() {}` : main보다 먼저 호출됨.
+- package import 하면, init method가 있다면 호출된다.
+- [https://go.dev/doc/effective_go#initialization](https://go.dev/doc/effective_go#initialization)
+
+### 데이터 타입
+#### Boolean 
+- 암묵적 형 변환 X : 0, Nil -> false 변환 없음.
+- 논리 연산자 &&, ||, ! 연산 가능
+- 논리 연산자 >, <, !=, ==, <=, >= 
+
+### Numberic
+- 정수, 실수, 복소수
+- 32bit, 64bit, unsigned(양수)
+- 정수: 8진수(0), 16진수(0x), 10진수 => 시작하는 prefix가 0이면 8진수, 0x이면 16진수이다.
+- rune(유니코드), byte(아스키) 정수 할당 가능
+- 실수(부동소수점)
+  - float32(7자리), float64(15자리)
+    - 32 -> 64 변환할 때 주의!
+
+
+
+
