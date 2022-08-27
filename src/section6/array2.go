@@ -31,4 +31,5 @@ func main() {
 	for v := range arr2 {
 		fmt.Println("ex4 : ", v)
 	}
+
 }
