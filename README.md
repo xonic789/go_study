@@ -166,7 +166,43 @@ sum := func(c int) int { //익명함수 선언과 동시에 할당
 - 상태, 메소드 분리해서 정의(결합성 없음)
 - 사용자 정의 타입 : 구조체, 인터페이스, 기본타입(int, float, string), 함수
 - 구조체와 -> 메소드 연결을 통해서 타 언어의 클래스 형식처럼 사용 가능하다!(객체지향)
--  리시버(구조체 메소드) 전달(값, 참조) 형식
+- 리시버(구조체 메소드) 전달(값, 참조) 형식
 - 함수는 기본적으로 값 호출 -> 변수의 값이 복사 후 내부 전달(원본 수정X) -> 맵, 슬라이스 등은 참조 전달
 - 리시버(구조체)도 마찬가지로 포인터를 활용해서 메소드내에서 원본 수정 가능
   - 반대로 말하면, 값 전달으로는 원본 값 수정이 되지 않음 (객체의 상태 수정 X)
+
+### 생성자 관례
+```go
+type Account struct {
+	number   string
+	balance  float64
+	interest float64
+}
+
+func NewAccount(number string, balance float64, interest float64) *Account {
+	return &Account{number, balance, interest}
+}
+```
+
+### 구조체 임베디드 패턴
+- 다른 관점으로 메소드를 재사용하는 장점 제공
+- 상속을 허용하지 않는 Go 언어에서 메소드 상속 활용을 위한 패턴
+```go
+type Employee struct {
+	name   string
+	salary float64
+	bonus  float64
+}
+
+func (e Employee) Calculate() float64 {
+	return e.salary + e.bonus
+}
+
+type Executives struct {
+	Employee
+	specialBonus float64
+}
+```
+
+### 구조체 임베디드 메소드 오버라이딩 패턴
+- 직접 구조체 타입을 명시해서 리시버를 임베디드 구조체와 이름을 같게 한다면 Go에서 오버라이딩 기능 제공 
