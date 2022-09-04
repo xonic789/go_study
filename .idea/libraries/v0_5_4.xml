@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="v0.5.4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/pkg/mod/cache/download/github.com/hashicorp/golang-lru/@v/v0.5.4.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

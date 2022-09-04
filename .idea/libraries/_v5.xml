@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="@v5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/pkg/mod/cache/download/mvdan.cc/gofumpt/@v/v0.3.1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/pkg/mod/cache/download/mvdan.cc/gofumpt/@v/v0.3.0.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

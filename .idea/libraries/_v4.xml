@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="@v4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/pkg/mod/cache/download/golang.org/x/vuln/@v/v0.0.0-20220613164644-4eb5ba49563c.zip!/" />
+      <root url="jar://$PROJECT_DIR$/pkg/mod/cache/download/golang.org/x/vuln/@v/v0.0.0-20220725105440-4151a5aca1df.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
