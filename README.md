@@ -258,5 +258,92 @@ type Executives struct {
 - 원자성 사용 -> 기능적으로 분할 불가능한 완전 보증된 일련의 조작, 모두 성공하거나, 모두 실패
 - 모든 조작이 완료 될 때까지 다른 프로세스 개입 불가
 - sync/atomic 패키지에서 원자적 연산자 제공
-- https://golang.org/pkg/sync/atomic/
+- [https://golang.org/pkg/sync/atomic/](https://golang.org/pkg/sync/atomic/)
 - 주로 공용 변수에 관한 계산 사용
+
+## 에러 처리
+- 소프트웨어의 품질 향상시 가장 중요한 것 -> 유형 코드 및 에러 정보 등 정보를 남기는 것!
+- Go에서는 기본적으로 error 패키지에서 error 인터페이스를 제공한다.
+- type error interface { Error() string }
+- 즉, Error 메서드를 구현하면 사용자 정의 에러 처리 제작 가능.
+- 기본적으로 메서드마다 리턴 타입 2개(리턴 값, 에러)
+- 주로 
+  1. Errorf(**에러 타입 리턴**) 메소드
+  2. Fatal(**프로그램 종료**) 메소드를 통해서 에러 출력
+### 에러 처리 고급
+- error 타입이 아닌 경우 에러 처리 방법?
+- Error 메소드를 구현해서 사용자 정의 에러 처리.
+- 구조체를 사용해서 세부적인 정보 출력 가능
+- 덕타입을 활용.
+### Panic, Recover
+- Panic : 프로그램을 비정상적으로 종료
+- Recover : 비정상 종료를 복구
+### Go Panic 함수
+- 사용자가 에러 발생 가능
+- Panic 함수는 호출 즉시, 해당 메소드를 즉시 중지시키고 defer 함수를 호출하고 자기 자신을 호출한 곳으로 리턴
+- 런타임 이외에 사용자가 코드 흐름에 따라 에러를 발생 시킬 때 중요!
+- 문법적인 에러는 아니지만, 논리적인 코드 흐름에 따른 에러 발생 처리 가능
+
+### Go Recover 함수
+- 에러 복구 가능
+- Panic으로 발생한 에러를 복구 후 코드 재실행(프로그램 종료되지 않는다)
+- 즉, 코드 흐름을 정상 상태로 복구 하는 기능
+- Panic에서 설정한 메시지를 받아올 수 있다.
+
+## 파일 입출력
+### 파일 쓰기
+- Create : 새 파일 작성 및 파일 열기
+- Close : 리소스 닫기
+- Write, WriteString, WriteAt : 파일 쓰기
+- 각 운영체제 권한 주의
+
+### 파일 읽기
+- Open : 기존 파일 열기
+- Close : 리소스 닫기
+- Read, ReadAt : 파일 읽기
+- 각 운영체제 권한 주의(오류메시지 확인)
+- 탐색 Seek 중요
+- [https://golang.org/pkg/os](https://golang.org/pkg/os)
+
+### 파일 읽기, 쓰기 -> ioutil 패키지 활용
+- 더욱 편리하고 직관적으로 파일을 읽고 쓰기 가능
+- 아래 메소드 확인 가능
+- WriteFile(), ReadFile(), ReadAll() 등 사용 가능
+- [https://golang.org/pkg/io/ioutil](https://golang.org/pkg/io/ioutil) => Deprecated
+### 파일 읽기, 버퍼사용 쓰기 -> bufio 패키지 사용
+- ioutil, bufio 등은 io.Reader, io.Writer 인터페이스를 구현함 -> 즉 Writer, Read 메소드를 사용 가능
+```go
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+```
+- 즉, bufio의 NewReader, NewWriter를 통해서 객체 반환 후 메소드 사용
+```text
+상태 
+a ----> a
+b ----> ab
+c ----> abc
+d ----> abcd
+e ----> e       ----> abcd
+e ----> ef      ----> abcd
+e ----> efg     ----> abcd
+e ----> efgh    ----> abcd
+e ----> i       ----> abcdefgh
+```
+- 버퍼를 사용하면, 파일을 읽고 쓰는 횟수를 줄일 수 있다.
+
+## 사용자 패키지 작성 & Go 문서화
+- 기준은 GOPATH/src
+- 패키지 폴더명(디렉토리명) 명확하게 지정
+- 패키지 파일의 package 이름으로 사용한다. 또는 alias 사용
+- package main 을 제외하고 package 문서에 등록
+- 기본적으로 GOROOT의 패키지(pkg) 검색 -> GOPATH의 패키지(src/pkg) 검색
+- go install 명령어 실행의 경우 -> GOPATH/pkg에 등록 (문서화)
+- godoc -http=:6060(임의의포트) -> pkg 이동 -> 본인 패키지 메소드 및 주석 확인(패키지, 타입, 메소드) 주석
+### 외부 저장소 패키지 설치
+2가지 방법
+1. import 선언 후 폴더 이동 후 go get 설치 -> 사용
+2. go get 패키지 주소 설치 -> 선언
